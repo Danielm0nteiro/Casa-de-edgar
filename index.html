@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Aloha Cumuru — Casa de Edgar em Cumuruxatiba. Seu refúgio à beira-mar na Bahia."/>
   <title>Aloha Cumuru</title>
-  
+
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌊</text></svg>">
-  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+
   <style>
     :root {
       --sand: #f5efe6;
@@ -35,13 +39,19 @@
     /* ── HERO ── */
     .hero {
       position: relative;
-      height: 100vh;
+      /* fix mobile browser chrome/safari 100vh bug */
+      height: 100svh;
       min-height: 600px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+    }
+
+    /* fallback for browsers without svh support */
+    @supports not (height: 100svh) {
+      .hero { height: calc(var(--vh, 1vh) * 100); }
     }
 
     .hero-bg {
@@ -107,7 +117,8 @@
 
     .scroll-hint {
       position: absolute;
-      bottom: 2.5rem;
+      /* safe area para notch/barra do navegador */
+      bottom: calc(2.5rem + env(safe-area-inset-bottom));
       left: 50%;
       transform: translateX(-50%);
       display: flex;
@@ -199,14 +210,6 @@
       font-style: italic;
       font-weight: 300;
       letter-spacing: 0.05em;
-    }
-
-    /* ── PHOTO UPLOAD HINT ── */
-    .upload-note {
-      margin-top: 1.2rem;
-      font-size: 0.78rem;
-      color: var(--text-light);
-      font-style: italic;
     }
 
     /* ── MAPS SECTION ── */
@@ -422,11 +425,13 @@
       top: 1.5rem;
       right: 1.8rem;
       color: #fff;
-      font-size: 2rem;
+      font-size: 2.5rem;
       cursor: pointer;
       line-height: 1;
       opacity: 0.7;
       transition: opacity 0.2s;
+      /* área de toque maior no celular */
+      padding: 0.5rem;
     }
 
     .lightbox-close:hover { opacity: 1; }
@@ -458,8 +463,9 @@
   <div class="main-photo-frame" id="main-photo-frame">
     <img
       src="imagens/01.jpeg"
-      alt="Recanto da Garça"
+      alt="Vista da Aloha Cumuru, casa de temporada em Cumuruxatiba"
       id="main-photo"
+      fetchpriority="high"
     />
     <div class="photo-caption">Aloha Cumuru — O seu refúgio em Cumuruxatiba.</div>
   </div>
@@ -524,128 +530,127 @@
   <div class="section-divider"></div>
 
   <div class="gallery-grid">
-    <!-- Troque cada src= pela sua foto real -->
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/01.jpeg" alt="Foto 1" loading="lazy"/>
-      <div class="gallery-item-overlay"></div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/02.jpeg" alt="Foto 2" loading="lazy"/>
+      <img src="imagens/01.jpeg" alt="Foto da casa 1" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/03.jpeg" alt="Foto 3" loading="lazy"/>
+      <img src="imagens/02.jpeg" alt="Foto da casa 2" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/04.jpeg" alt="Foto 4" loading="lazy"/>
+      <img src="imagens/03.jpeg" alt="Foto da casa 3" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/05.jpeg" alt="Foto 5" loading="lazy"/>
+      <img src="imagens/04.jpeg" alt="Foto da casa 4" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/06.jpeg"/>
+      <img src="imagens/05.jpeg" alt="Foto da casa 5" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/07.jpeg" alt="Foto 7" loading="lazy"/>
+      <img src="imagens/06.jpeg" alt="Foto da casa 6" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/08.jpeg" alt="Foto 8" loading="lazy"/>
+      <img src="imagens/07.jpeg" alt="Foto da casa 7" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/09.jpeg" alt="Foto 9" loading="lazy"/>
+      <img src="imagens/08.jpeg" alt="Foto da casa 8" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/10.jpeg" alt="Foto 10" loading="lazy"/>
+      <img src="imagens/09.jpeg" alt="Foto da casa 9" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/11.jpeg" alt="Foto 11" loading="lazy"/>
+      <img src="imagens/10.jpeg" alt="Foto da casa 10" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/12.jpeg" alt="Foto 12" loading="lazy"/>
+      <img src="imagens/11.jpeg" alt="Foto da casa 11" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/13.jpeg" alt="Foto 13" loading="lazy"/>
+      <img src="imagens/12.jpeg" alt="Foto da casa 12" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/14.jpeg" alt="Foto 14" loading="lazy"/>
+      <img src="imagens/13.jpeg" alt="Foto da casa 13" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/15.jpeg" alt="Foto 15" loading="lazy"/>
+      <img src="imagens/14.jpeg" alt="Foto da casa 14" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/16.jpeg" alt="Foto 16" loading="lazy"/>
+      <img src="imagens/15.jpeg" alt="Foto da casa 15" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/17.jpeg" alt="Foto 17" loading="lazy"/>
+      <img src="imagens/16.jpeg" alt="Foto da casa 16" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/18.jpeg" alt="Foto 18" loading="lazy"/>
+      <img src="imagens/17.jpeg" alt="Foto da casa 17" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/19.jpeg" alt="Foto 19" loading="lazy"/>
+      <img src="imagens/18.jpeg" alt="Foto da casa 18" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/20.jpeg" alt="Foto 20" loading="lazy"/>
+      <img src="imagens/19.jpeg" alt="Foto da casa 19" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/21.jpeg" alt="Foto 21" loading="lazy"/>
+      <img src="imagens/20.jpeg" alt="Foto da casa 20" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/22.jpeg" alt="Foto 22" loading="lazy"/>
+      <img src="imagens/21.jpeg" alt="Foto da casa 21" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/23.jpeg" alt="Foto 23" loading="lazy"/>
+      <img src="imagens/22.jpeg" alt="Foto da casa 22" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
     <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/24.jpeg" alt="Foto 24" loading="lazy"/>
+      <img src="imagens/23.jpeg" alt="Foto da casa 23" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
-        <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/25.jpeg" alt="Foto 25" loading="lazy"/>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="imagens/24.jpeg" alt="Foto da casa 24" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
-        <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/26.jpeg" alt="Foto 26" loading="lazy"/>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="imagens/25.jpeg" alt="Foto da casa 25" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
-        <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/27.jpeg" alt="Foto 27" loading="lazy"/>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="imagens/26.jpeg" alt="Foto da casa 26" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
-        <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/28.jpeg" alt="Foto 28" loading="lazy"/>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="imagens/27.jpeg" alt="Foto da casa 27" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
-        <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/29.jpeg" alt="Foto 29" loading="lazy"/>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="imagens/28.jpeg" alt="Foto da casa 28" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
-        <div class="gallery-item" onclick="openLightbox(this)">
-      <img src="imagens/30.jpeg" alt="Foto 30" loading="lazy"/>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="imagens/29.jpeg" alt="Foto da casa 29" loading="lazy" decoding="async"/>
       <div class="gallery-item-overlay"></div>
     </div>
-</div>
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="imagens/30.jpeg" alt="Foto da casa 30" loading="lazy" decoding="async"/>
+      <div class="gallery-item-overlay"></div>
+    </div>
+  </div>
 </section>
 
 <!-- ── FOOTER ── -->
@@ -661,6 +666,13 @@
 </div>
 
 <script>
+  // Corrige 100vh no mobile (barra do navegador)
+  function setVh() {
+    document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
+  }
+  setVh();
+  window.addEventListener('resize', setVh);
+
   function openLightbox(el) {
     const src = el.querySelector('img').src;
     document.getElementById('lightbox-img').src = src;
@@ -676,4 +688,3 @@
 
 </body>
 </html>
-
